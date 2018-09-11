@@ -1,0 +1,45 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Mon Sep 03 16:48:16 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                      RST       code   0x000000    program   0x000004
+                   .cinit    romdata   0x000004    program   0x000002
+                      SRT       code   0x000030    program   0x00003e
+               .udata_acs      udata   0x000000       data   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000005      
+                            0x000030    0x00006d      
+            68 out of 33048 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                LeftShift   0x00005c    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                     Main   0x000040    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                    Setup   0x000030    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+      WaitForAdConversion   0x00004e    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+           numberOfShifts   0x000001       data     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                   onLEDs   0x000000       data     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    Setup   0x000030    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                     Main   0x000040    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+      WaitForAdConversion   0x00004e    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                LeftShift   0x00005c    program     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+                   onLEDs   0x000000       data     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+           numberOfShifts   0x000001       data     static Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_1.X\main.asm
+
+
