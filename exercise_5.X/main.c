@@ -10,6 +10,7 @@
 #include <delays.h>
 
 #define MAX_BUFFER_SIZE 50
+#define ever ; ;
 
 // CLK FOR BOTH CASES
 // Create a relitvely fast pwm to perform this task
@@ -35,13 +36,12 @@
 
 
 
+int writeLedReady = 0;
 
 void initInterrupts() {
     RCONbits.IPEN = 1;      // Enable priority levels on interrupts, pg53
     INTCONbits.GIEH = 1;    // Enables all low priority interrupts, pg75
     INTCONbits.GIEL = 1;    // Enables all high priority interrupts, pg75
-
-    PIR1bits.SSPIF = 1;
 }
 
 initSPI() {
@@ -55,8 +55,6 @@ initSPI() {
 
     SSPCON1bits.SSPEN = 1;	// Enables serial port and configures SCK, SDO, SDI, and SS as serial port pins, pg127
 
-
-
 }
 
 
@@ -64,46 +62,72 @@ setPortC(){
     TRISCbits.TRISC4 = 1;   // Sets the SPI input port, pg125 diagram
     TRISCbits.TRISC5 = 0;   // Sets the SPI output port, pg125 diagram
     TRISCbits.TRISC3 = 0;   // Sets the output port for the SPI clock, pg125 diagram
-
-	TRISCbits.TRISC6 = 1;	// Debug
 }
 
 setPortB(){
     TRISBbits.TRISB0 = 0;   // The SH/LD pin from the SN74HC164 Parrallel to Serial Chip is connected to PORTB<0>
 							// Writing this to LOW loads parallel data in
 							// Writing this to HIGH allows clocking to occur, we should write to SSPBUF after setting this to HIGH
-    TRISBbits.TRISB1 = 0;
+
+    TRISBbits.TRISB1 = 0;   // Sets teh ability to disable the inputs for the serial to parralel input
+}
+
+initTimerInterrupt(){
+    CCPR1L = 0x46;          // Sets counter value to accomplish a 30 hz interrupt
+    CCPR1H = 0x10;
+
+    T1CON = 0b10110001;     // Bit 7:	16 bit mode
+                            // Bit 5-4:	Prescale value of 8
+                            // Bit 1:	Use internal clock
+                            // Bit 0:	Timer 1 ON
+
+    CCP1CON = 0b00001011;   // Bit 3-0:	Compare Mode. CCPIF is set on successful compare.
+                            // TIMER1 is cleared on successful compare. pg1202
+
+    PIE1bits.CCP1IE = 1;    // Enable Interrupts for CCP1, pg80
+    PIR1bits.CCP1IF = 0;    //Clear the CCP1 Interrupt Flag, pg78
 }
 
 void main() {
 	unsigned char TempVar;
+    int currentState;
 
 	initInterrupts();
-
+    initTimerInterrupt();
     setPortC();
     setPortB();
-
 	initSPI();
 
 
-	while(1) {
-		PORTBbits.RB0 = 0;      // Inputs the parallel data into the parrallel to serial converter.
+	while (1) {
 
-		Delay10KTCYx(1);	    // Delay by 10ms
+        if(writeLedReady){
+            PORTBbits.RB0 = 0;      // Inputs the parallel data into the parrallel to serial converter.
 
-	    PORTBbits.RB0 = 1;      // Sets parralel to serial converter to output buffer mode
+    		Delay10TCYx(10);	    // Delay by 100us
 
-		TempVar = SSPBUF;        // Clear BF
-	    PIR1bits.SSPIF = 0;      // Clear interrupt flag
-	  	SSPBUF = 0xF0;           // initiate bus cycle
-	  	while ( !SSPSTATbits.BF );  // wait until cycle complete
+    	    PORTBbits.RB0 = 1;      // Sets parralel to serial converter to output buffer mode
 
 
-		TempVar = SSPBUF;        // Clear BF
-		PIR1bits.SSPIF = 0;      // Clear interrupt flag
-		SSPBUF = TempVar;
-		while ( !SSPSTATbits.BF );  // wait until cycle completes
-	}
+            PORTBbits.RB1 = 0;          // Disables the serial to parralel chip from chaniging its state
+            SSPBUF = 0xFF;              // Sends data in order to read from the buffer
+            while ( !SSPSTATbits.BF );  // wait until cycle complete
+
+
+    		currentState = SSPBUF;        // Reads in from the buffer
+    	    // PIR1bits.SSPIF = 0;      // Clear interrupt flag
+    	  	// SSPBUF = 0xF0;           // initiate bus cycle
+
+            PORTBbits.RB1 = 1;          // Enables the serial to parralel chip to change its state
+
+    		// PIR1bits.SSPIF = 0;      // Clear interrupt flag
+    		SSPBUF = currentState;      // Pushes out the current state onto the LED's
+    		while ( !SSPSTATbits.BF );  // wait until cycle completes
+
+            writeLedReady = 0;
+    	}
+    }
+
 
 }
 
@@ -111,9 +135,12 @@ void main() {
 void highPriorityISR(void) {
 	// This High Priority ISR should check any interrupt flags that we're
 	// interested in, and then go to some subroutine ideally.
+    if (PIR1bits.CCP1IF == 1) {
+		writeLedReady = 1;
+        PIR1bits.CCP1IF = 0;
+	}
 
     // Every time interrupt is triggered, lights should swap
-    PORTB = ~PORTB;
 }
 
 #pragma code highISR = 0x08

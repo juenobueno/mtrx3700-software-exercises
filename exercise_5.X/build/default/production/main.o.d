@@ -1,4 +1,4 @@
 build/default/production/main.o:  \
-	Z:/Dropbox/UNI/2018/Semester\ 2/MTRX3700/Software\ Exercises/exercise_5.X/main.c  \
-	Z:/Dropbox/UNI/2018/Semester\ 2/MTRX3700/Software\ Exercises/exercise_5.X/ConfigRegs.h  \
+	//Mac/Home/Documents/Uni/Semester\ 6/MTRX3700/Assignments/mtrx3700-software-exercises/exercise_5.X/main.c  \
+	//Mac/Home/Documents/Uni/Semester\ 6/MTRX3700/Assignments/mtrx3700-software-exercises/exercise_5.X/ConfigRegs.h  \
 
