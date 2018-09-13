@@ -1,7 +1,9 @@
-Warning[2068] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 47 : obsolete use of implicit 'int' detected
-Warning[2068] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 63 : obsolete use of implicit 'int' detected
-Warning[2068] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 71 : obsolete use of implicit 'int' detected
-Warning[2058] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 81 : call of function without prototype
-Warning[2058] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 83 : call of function without prototype
-Warning[2058] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 84 : call of function without prototype
-Warning[2058] Z:\Dropbox\UNI\2018\Semester 2\MTRX3700\Software Exercises\exercise_5.X\main.c 86 : call of function without prototype
+Warning[2068] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 47 : obsolete use of implicit 'int' detected
+Warning[2068] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 61 : obsolete use of implicit 'int' detected
+Warning[2068] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 67 : obsolete use of implicit 'int' detected
+Warning[2068] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 75 : obsolete use of implicit 'int' detected
+Warning[2058] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 95 : call of function without prototype
+Warning[2058] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 96 : call of function without prototype
+Warning[2058] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 97 : call of function without prototype
+Warning[2058] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 98 : call of function without prototype
+Warning[2058] \\Mac\Home\Documents\Uni\Semester 6\MTRX3700\Assignments\mtrx3700-software-exercises\exercise_5.X\main.c 99 : call of function without prototype
